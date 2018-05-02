@@ -11,3 +11,4 @@ echo '''
     "method":"aes-256-cfb"
 }
 ''' > shadowsocks.json
+mv shadowsocks.json /etc/shadowsocks.json
