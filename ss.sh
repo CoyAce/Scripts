@@ -12,3 +12,5 @@ echo '''
 }
 ''' > shadowsocks.json
 mv shadowsocks.json /etc/shadowsocks.json
+mkdir /etc/supervisor
+mv shadowsocks.conf /etc/supervisor/shadowsocks.conf
