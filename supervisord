@@ -1,4 +1,4 @@
 #!/bin/bash
 pip install supervisor
 echo_supervisord_conf > /etc/supervisord.conf
-echo 'files = /etc/supervisor/conf/*.conf'>>/etc/supervisord.conf
+echo 'files = /etc/supervisor/*.conf'>>/etc/supervisord.conf
