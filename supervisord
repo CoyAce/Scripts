@@ -3,3 +3,6 @@ pip install supervisor
 echo_supervisord_conf > /etc/supervisord.conf
 echo '[include]'>>/etc/supervisord.conf
 echo 'files = /etc/supervisor/*.conf'>>/etc/supervisord.conf
+mv supervisord.service /etc/systemd/system/supervisord.service
+systemctl enable supervisord.service   #自启动
+systemctl start supervisord.service    #启动服务
