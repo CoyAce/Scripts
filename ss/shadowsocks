@@ -26,6 +26,9 @@ while getopts "ishabpu:" arg
 				wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
 				chmod +x bbr.sh
 				./bbr.sh
+				echo '''# remove kernel
+				# rpm -qa|grep kernel
+				# yum remove kernel_name'''
 			h)
 				echo "usage: -a ip address,-i install,-s start,-u update host,-b install bbr"
 			;;
