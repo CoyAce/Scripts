@@ -27,7 +27,7 @@ update_host(){
 
 #get local ip address
 init_config
-while getopts "ishabpu:" arg
+while getopts "ishabup:" arg
 	do
 		case $arg in
 			a)
