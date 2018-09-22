@@ -64,3 +64,8 @@ tar -xvf ocdownloader.tar.gz
 chmod 755 ocdownloader
 mv ocdownloader /var/www/html/nextcloud/apps/ocdownloader
 pip install --upgrade youtube_dl
+
+#aria2 webui
+cd ~
+git clone https://github.com/ziahamza/webui-aria2.git
+mv webui-aria2 /var/www/html/webui-aria2
