@@ -11,6 +11,12 @@ init_config(){
 		}
 		'''> /etc/shadowsocks.json
 	fi
+
+	rpm -qa | grep -qw firewalld || yum install firewalld
+	systemctl start firewalld
+	firewall-cmd --zone=dmz --add-port=8379/tcp --permanent
+	firewall-cmd --zone=public --change-interface=eth0
+	firewall-cmd --reload
 }
 
 get_ip(){
