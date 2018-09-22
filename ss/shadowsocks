@@ -1,5 +1,5 @@
 init_config(){
-	if [ ! -f /etc/shadowsocks ];then
+	if [ ! -f /etc/shadowsocks.json ];then
 		echo '''
 		{
 			"server":"host",
