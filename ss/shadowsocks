@@ -21,7 +21,7 @@ get_ip(){
 
 update_host(){
 	host=`get_ip`
-	sed -i "s/\"server\".*/\"server\":\"$host\"/" /etc/shadowsocks.json
+	sed -i "s/\"server\".*/\"server\":\"$host\",/" /etc/shadowsocks.json
 	cat /etc/shadowsocks.json
 }
 
@@ -35,7 +35,7 @@ while getopts "ishabup:" arg
 			;;
 			p)
 				password=$OPTARG
-				sed -i "s/\"password\".*/\"password\":\"$password\"/" /etc/shadowsocks.json
+				sed -i "s/\"password\".*/\"password\":\"$password\",/" /etc/shadowsocks.json
 				update_host
 			;;
 			u)
