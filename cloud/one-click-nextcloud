@@ -45,3 +45,5 @@ sudo chown -R root:apache /var/www/html
 sudo firewall-cmd --zone=public --permanent --add-service=http
 sudo firewall-cmd --zone=public --permanent --add-service=https
 sudo firewall-cmd --reload
+sudo chmod 0644 /var/www/html/nextcloud/.htaccess
+sudo chmod 0644 /var/www/html/nextcloud/data/.htaccess
