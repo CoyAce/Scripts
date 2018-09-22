@@ -56,3 +56,11 @@ sudo firewall-cmd --zone=public --permanent --add-service=http
 sudo firewall-cmd --zone=public --permanent --add-service=https
 sudo firewall-cmd --reload
 systemctl restart httpd.service
+
+#ocdownloader
+cd ~
+wget nhttps://github.com/e-alfred/ocdownloader/releases/download/1.5.6/ocdownloader.tar.gz
+tar -xvf ocdownloader.tar.gz
+chmod 755 ocdownloader
+mv ocdownloader /var/www/html/nextcloud/apps/ocdownloader
+pip install --upgrade youtube_dl
