@@ -1,0 +1,57 @@
+#get local ip address
+init_config
+while getopts "ishabpu:" arg
+	do
+		case $arg in
+			a)
+				get_ip
+			;;
+			p)
+				password=$OPTARG
+				sed -i "s/\"password\".*/\"password\":\"$password\"/" /etc/shadowsocks.json
+			u)
+				update_host
+			;;
+			i)
+				yum install python-setuptool
+				sudo easy_install pip
+				sudo pip install shadowsocks
+				echo "done"
+			;;
+			s)
+				nohup ssserver -c /etc/shadowsocks.json -d start &
+			;;
+			b)
+				yum install wget
+				wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
+				chmod +x bbr.sh
+				./bbr.sh
+			h)
+				echo "usage: -a ip address,-i install,-s start,-u update host,-b install bbr"
+			;;
+		esac
+	done
+
+init_config(){
+	if [! -f /etc/shadowsocks];then
+		echo '''
+		{
+			"server":"host",
+			"server_port":8379,
+			"local_port":1080,
+			"password":"password",
+			"timeout":600,
+			"method":"aes-256-cfb"
+		}
+		'''> /etc/shadowsocks.json
+	fi
+}
+
+update_host(){
+	host=
+	sed -i "s/\"server\".*/\"server\":\"$host\"/" /tec/shadowsocks.json
+}
+
+get_ip(){
+	echo `ifconfig eth0| grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'` 
+}
