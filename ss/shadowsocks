@@ -36,8 +36,9 @@ while getopts "ishabpu:" arg
 			p)
 				password=$OPTARG
 				sed -i "s/\"password\".*/\"password\":\"$password\"/" /etc/shadowsocks.json
+				update_host
 			;;
-			u|p)
+			u)
 				update_host
 			;;
 			i)
