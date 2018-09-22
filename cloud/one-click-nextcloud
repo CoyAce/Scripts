@@ -5,21 +5,20 @@
 sudo yum install httpd -y
 sudo sed -i "s/Options Indexes FollowSymLinks/Options FollowSymLinks/" /etc/httpd/conf/httpd.conf
 #sudo sed -i 's/^/#&/g' /etc/httpd/conf.modules.d/00-dav.conf
-sudo systemctl start httpd.service
 sudo systemctl enable httpd.service
 
 #install php 7
 yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum -y install yum-utils
 yum-config-manager --enable remi-php70
-yum -y install php php-common php-xml php-gd php-mbstring php-process php-mysqlnd php-intl php-mcrypt php-imap php-cli
+yum -y install php php-common php-xml php-zip php-gd php-mbstring php-process php-mysqlnd php-intl php-mcrypt php-imap php-cli
 sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php.ini
 
 #install mariaDB
 yum install mariadb mariadb-server -y
 sudo systemctl start mariadb.service
 sudo systemctl enable mariadb.service
-db_root_password=password
+db_root_password=$1
 mysql --user=root <<_EOF_
 UPDATE mysql.user SET Password=PASSWORD('${db_root_password}') WHERE User='root';
 DELETE FROM mysql.user WHERE User='';
@@ -56,6 +55,4 @@ sudo chown root:apache /var/www/html/nextcloud/data/.htaccess
 sudo firewall-cmd --zone=public --permanent --add-service=http
 sudo firewall-cmd --zone=public --permanent --add-service=https
 sudo firewall-cmd --reload
-sudo chmod 0644 /var/www/html/nextcloud/.htaccess
-sudo chmod 0644 /var/www/html/nextcloud/data/.htaccess
 systemctl restart httpd.service
