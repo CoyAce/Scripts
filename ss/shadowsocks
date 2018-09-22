@@ -57,5 +57,7 @@ update_host(){
 }
 
 get_ip(){
+	#install ifconfig
+	yum install net-tools
 	echo `ifconfig eth0| grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'` 
 }
