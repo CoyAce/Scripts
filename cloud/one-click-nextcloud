@@ -1,4 +1,10 @@
-https://www.vultr.com/docs/one-click-nextcloud
-
-centos7:
-https://www.vultr.com/docs/how-to-install-nextcloud-on-centos-7
+#centos7:
+#https://www.vultr.com/docs/how-to-install-nextcloud-on-centos-7
+sudo yum install epel-release -y
+sudo yum update -y
+sudo yum install httpd -y
+sudo sed -i "s/Options Indexes FollowSymLinks/Options FollowSymLinks/" /etc/httpd/conf/httpd.conf
+#sudo sed -i 's/^/#&/g' /etc/httpd/conf.modules.d/00-dav.conf
+sudo systemctl start httpd.service
+sudo systemctl enable httpd.service
+wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
