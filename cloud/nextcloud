@@ -69,3 +69,4 @@ pip install --upgrade youtube_dl
 cd ~
 git clone https://github.com/ziahamza/webui-aria2.git
 mv webui-aria2 /var/www/html/webui-aria2
+chown -R apache:apache /var/www/html/webui-aria2
