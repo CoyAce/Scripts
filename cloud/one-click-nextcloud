@@ -1,10 +1,42 @@
 #centos7:
 #https://www.vultr.com/docs/how-to-install-nextcloud-on-centos-7
-sudo yum install epel-release -y
-sudo yum update -y
+
+#install apache
 sudo yum install httpd -y
 sudo sed -i "s/Options Indexes FollowSymLinks/Options FollowSymLinks/" /etc/httpd/conf/httpd.conf
 #sudo sed -i 's/^/#&/g' /etc/httpd/conf.modules.d/00-dav.conf
 sudo systemctl start httpd.service
 sudo systemctl enable httpd.service
+
+#install php 7
+yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum -y install yum-utils
+yum-config-manager --enable remi-php70
+yum -y install php php-common php-xml php-gd php-mbstring php-process php-mysqlnd php-intl php-mcrypt php-imap php-cli
+sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php.ini
+
+#install mariaDB
+yum install mariadb mariadb-server -y
+sudo systemctl start mariadb.service
+sudo systemctl enable mariadb.service
+db_root_password=password
+mysql --user=root <<_EOF_
+UPDATE mysql.user SET Password=PASSWORD('${db_root_password}') WHERE User='root';
+DELETE FROM mysql.user WHERE User='';
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+DROP DATABASE IF EXISTS test;
+DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
+CREATE DATABASE nextcloud;
+CREATE USER 'admin' IDENTIFIED BY '${db_root_password}';
+GRANT ALL PRIVILEGES ON nextcloud.* TO 'admin' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+_EOF_
+
+#install nextcloud
 wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
+yum install unzip -y
+unzip nextcloud-14.0.0.zip
+sudo mv nextcloud /var/www/html && sudo chown apache:apache -R /var/www/html
+cd /var/www/html/nextcloud
+sudo -u apache php occ maintenance:install --database "mysql" --database-name "nextcloud"  --database-user "admin" --database-pass "${db_root_password}" --admin-user "admin" --admin-pass "${db_root_password}"
+ip=
