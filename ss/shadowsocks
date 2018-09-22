@@ -42,7 +42,7 @@ while getopts "ishabup:" arg
 				update_host
 			;;
 			i)
-				yum -y install python-setuptools
+				rpm -qa | grep -qw python-setuptools || yum -y install python-setuptools
 				sudo easy_install pip
 				sudo pip install shadowsocks
 				echo "done"
@@ -51,7 +51,7 @@ while getopts "ishabup:" arg
 				nohup ssserver -c /etc/shadowsocks.json -d start &
 			;;
 			b)
-				yum -y install wget
+				rpm -qa | grep -qw wget || yum -y install wget
 				wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
 				chmod +x bbr.sh
 				./bbr.sh
