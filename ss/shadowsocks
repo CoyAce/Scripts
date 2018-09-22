@@ -10,13 +10,12 @@ init_config(){
 			"method":"aes-256-cfb"
 		}
 		'''> /etc/shadowsocks.json
+		rpm -qa | grep -qw firewalld || yum install firewalld
+		systemctl start firewalld
+		firewall-cmd --zone=dmz --add-port=8379/tcp --permanent
+		firewall-cmd --zone=public --change-interface=eth0
+		firewall-cmd --reload
 	fi
-
-	rpm -qa | grep -qw firewalld || yum install firewalld
-	systemctl start firewalld
-	firewall-cmd --zone=dmz --add-port=8379/tcp --permanent
-	firewall-cmd --zone=public --change-interface=eth0
-	firewall-cmd --reload
 }
 
 get_ip(){
