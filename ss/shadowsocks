@@ -41,7 +41,7 @@ while getopts "ishabpu:" arg
 				update_host
 			;;
 			i)
-				yum -y install python-setuptool
+				yum -y install python-setuptools
 				sudo easy_install pip
 				sudo pip install shadowsocks
 				echo "done"
