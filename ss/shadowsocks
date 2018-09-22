@@ -1,5 +1,5 @@
 init_config(){
-	if [! -f /etc/shadowsocks];then
+	if [ ! -f /etc/shadowsocks ];then
 		echo '''
 		{
 			"server":"host",
@@ -36,11 +36,12 @@ while getopts "ishabpu:" arg
 			p)
 				password=$OPTARG
 				sed -i "s/\"password\".*/\"password\":\"$password\"/" /etc/shadowsocks.json
+			;;
 			u|p)
 				update_host
 			;;
 			i)
-				yum install python-setuptool
+				yum -y install python-setuptool
 				sudo easy_install pip
 				sudo pip install shadowsocks
 				echo "done"
@@ -49,7 +50,7 @@ while getopts "ishabpu:" arg
 				nohup ssserver -c /etc/shadowsocks.json -d start &
 			;;
 			b)
-				yum install wget
+				yum -y install wget
 				wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
 				chmod +x bbr.sh
 				./bbr.sh
