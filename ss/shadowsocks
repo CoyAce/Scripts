@@ -1,3 +1,30 @@
+init_config(){
+	if [! -f /etc/shadowsocks];then
+		echo '''
+		{
+			"server":"host",
+			"server_port":8379,
+			"local_port":1080,
+			"password":"password",
+			"timeout":600,
+			"method":"aes-256-cfb"
+		}
+		'''> /etc/shadowsocks.json
+	fi
+}
+
+get_ip(){
+	#install ifconfig
+	yum install net-tools
+	echo `ifconfig eth0| grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'` 
+}
+
+update_host(){
+	host=`get_ip`
+	sed -i "s/\"server\".*/\"server\":\"$host\"/" /etc/shadowsocks.json
+	cat /etc/shadowsocks.json
+}
+
 #get local ip address
 init_config
 while getopts "ishabpu:" arg
@@ -9,7 +36,7 @@ while getopts "ishabpu:" arg
 			p)
 				password=$OPTARG
 				sed -i "s/\"password\".*/\"password\":\"$password\"/" /etc/shadowsocks.json
-			u)
+			u|p)
 				update_host
 			;;
 			i)
@@ -29,35 +56,9 @@ while getopts "ishabpu:" arg
 				echo '''# remove kernel
 				# rpm -qa|grep kernel
 				# yum remove kernel_name'''
+			;;
 			h)
 				echo "usage: -a ip address,-i install,-s start,-u update host,-b install bbr"
 			;;
 		esac
 	done
-
-init_config(){
-	if [! -f /etc/shadowsocks];then
-		echo '''
-		{
-			"server":"host",
-			"server_port":8379,
-			"local_port":1080,
-			"password":"password",
-			"timeout":600,
-			"method":"aes-256-cfb"
-		}
-		'''> /etc/shadowsocks.json
-	fi
-}
-
-update_host(){
-	host=`get_ip`
-	sed -i "s/\"server\".*/\"server\":\"$host\"/" /etc/shadowsocks.json
-	cat /etc/shadowsocks.json
-}
-
-get_ip(){
-	#install ifconfig
-	yum install net-tools
-	echo `ifconfig eth0| grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'` 
-}
