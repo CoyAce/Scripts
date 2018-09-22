@@ -51,7 +51,7 @@ init_config(){
 }
 
 update_host(){
-	host=
+	host=`get_ip`
 	sed -i "s/\"server\".*/\"server\":\"$host\"/" /tec/shadowsocks.json
 	cat /etc/shadowsocks.json
 }
