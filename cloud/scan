@@ -1,0 +1,3 @@
+cd /var/www/html/nextcloud
+sudo -u apache php occ files:clean
+sudo -u apache php occ files:scan --all
