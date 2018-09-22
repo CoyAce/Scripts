@@ -10,5 +10,6 @@ cp aria2.conf /etc/aria2.conf
 cp aria2-supervisor.conf /etc/supervisor/aria2-supervisor.conf
 cp supervisord.service /etc/systemd/system/supervisord.service
 firewall-cmd --zone=public --add-port=6800/tcp --permanent
+firewall-cmd --reload
 systemctl enable supervisord.service   #自启动
 systemctl start supervisord.service    #启动服务
