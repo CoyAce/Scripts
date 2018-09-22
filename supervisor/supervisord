@@ -5,6 +5,8 @@ echo '[include]'>>/etc/supervisord.conf
 echo 'files = /etc/supervisor/*.conf'>>/etc/supervisord.conf
 mkdir /etc/supervisor
 mv shadowsocks.conf /etc/supervisor/shadowsocks.conf
+mv aria2.conf /etc/aria2.conf
+mv aria2-supervisor.conf /etc/supervisor/aria2-supervisor.conf
 mv supervisord.service /etc/systemd/system/supervisord.service
 systemctl enable supervisord.service   #自启动
 systemctl start supervisord.service    #启动服务
