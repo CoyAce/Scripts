@@ -1,0 +1,23 @@
+while getopts "ish" arg
+do
+	case $arg in
+		i)
+		#install ifconfig
+		yum install net-tools
+
+		#change kernel
+		rpm -ivh https://buildlogs.centos.org/c7.1511.00/kernel/20151119220809/3.10.0-327.el7.x86_64/kernel-3.10.0-327.el7.x86_64.rpm —force
+
+		#install superspeeder
+		wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder-v.sh && bash serverspeeder-v.sh CentOS 7.2 3.10.0-327.el7.x86_64 x64 3.11.20.5 serverspeeder_72327
+		echo "done"
+		;;
+		s)
+		#start superspeeder
+		/serverspeeder/bin/serverSpeeder.sh start
+		;;
+		h)
+		echo "usage: -i install -s start"
+		;;
+		esac
+done
