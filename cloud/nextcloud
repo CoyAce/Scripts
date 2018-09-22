@@ -62,6 +62,7 @@ cd ~
 wget nhttps://github.com/e-alfred/ocdownloader/releases/download/1.5.6/ocdownloader.tar.gz
 tar -xvf ocdownloader.tar.gz
 chmod 755 ocdownloader
+sed -i '/$Args =.*/a \\tarray_unshift($Args,"token:$0052634483$");' ocdownloader/controller/lib/aria2.php
 mv ocdownloader /var/www/html/nextcloud/apps/ocdownloader
 pip install --upgrade youtube_dl
 
