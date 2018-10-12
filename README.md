@@ -8,3 +8,5 @@ Usage:
 3、ss/shadowsocks -u 根据本机ip设置配置文件
 
 4、supervisor/supervisord 设置开机启动
+
+5、cloud/nextcloud 安装nextcloud
