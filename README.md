@@ -1,4 +1,6 @@
 # Shadowsocks安装和启动脚本
+Usage:
+
 1、ss/shadowsocks -i -p password 安装shadowsocks
 
 2、安装bbr
