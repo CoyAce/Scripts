@@ -1,4 +1,4 @@
 #!/bin/bash
-cd `find /var/www/html -name occ -print|sort -r|head -n 1`
+cd `find /var/www/html -name occ -printf '%h\n'|sort|head -n 1`
 sudo -u apache php occ files:clean
 sudo -u apache php occ files:scan --all
