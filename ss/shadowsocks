@@ -27,7 +27,7 @@ get_ip(){
 update_host(){
 	host=`get_ip`
 	sed -i "s/\"server\".*/\"server\":\"$host\",/" /etc/shadowsocks.json
-	sed -i "s/0 => .*,/&1 => \'$host\',/" /var/www/html/config/config.php
+	sed -i "s/0 => .*,/1 => \'$host\',/" /var/www/html/*/config.php
 	cat /etc/shadowsocks.json
 }
 
