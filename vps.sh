@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 set timeout -1
-spawn ssh root@159.89.142.120
+spawn ssh root@coyace.top
 expect "*password:"
 send "password\r"
 interact
