@@ -6,6 +6,7 @@ echo '[include]'>>/etc/supervisord.conf
 echo 'files = /etc/supervisor/*.conf'>>/etc/supervisord.conf
 mkdir /etc/supervisor
 cp shadowsocks.conf /etc/supervisor/shadowsocks.conf
+cp update_ip.conf /etc/supervisor/update_ip.conf
 cp aria2.conf /etc/aria2.conf
 cp aria2-supervisor.conf /etc/supervisor/aria2-supervisor.conf
 cp supervisord.service /etc/systemd/system/supervisord.service
