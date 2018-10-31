@@ -40,7 +40,7 @@ local_ip = socket.gethostbyname(socket.getfqdn(socket.gethostname()))
 DomainName = sys.argv[1]
 AccessKeyId = sys.argv[2]
 AccessKeySecret = sys.argv[3]
-if len(sys.argv) > 3:
+if len(sys.argv) > 4:
     local_ip = sys.argv[4]
 
 # 创建AcsClient实例
