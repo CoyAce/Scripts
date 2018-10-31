@@ -32,6 +32,7 @@ FLUSH PRIVILEGES;
 _EOF_
 
 #install nextcloud
+cd ~
 wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
 yum install unzip -y
 unzip nextcloud-14.0.0.zip
