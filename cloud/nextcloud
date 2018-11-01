@@ -41,7 +41,7 @@ cd /var/www/html/nextcloud
 sudo -u apache php occ maintenance:install --database "mysql" --database-name "nextcloud"  --database-user "admin" --database-pass "${db_root_password}" --admin-user "admin" --admin-pass "${db_root_password}"
 ip=`ifconfig eth0| grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'` 
 sed -i "s/0 => .*,/0 => \'${ip}\',/" /var/www/html/nextcloud/config/config.php
-sed -i "s/1 => .*,/1 => \'coyace.top\',/" /var/www/html/nextcloud/config/config.php
+sed -i "/0 => .*,/a \\\t1 => \'coyace.top\'," /var/www/html/nextcloud/config/config.php
 sudo find /var/www/html/nextcloud -type f -print0 | sudo xargs -0 chmod 0640
 sudo find /var/www/html/nextcloud -type d -print0 | sudo xargs -0 chmod 0750
 sudo chown -R root:apache /var/www/html/nextcloud
