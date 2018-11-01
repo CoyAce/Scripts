@@ -2,4 +2,4 @@
 dd if=/dev/zero of=/opt/swap bs=1024 count=1048576
 mkswap /opt/swap
 swapon /opt/swap
-echo "/home/swap swap swap default 0 0" >> /etc/fstab
+echo "/opt/swap swap swap default 0 0" >> /etc/fstab
