@@ -1,7 +1,7 @@
 #!/bin/bash
 path=/opt/swap
 dd if=/dev/zero of=$path bs=1024 count=1048576
-chmod 600 $path
+chmod 666 $path
 mkswap $path
 swapon $path
 echo "$path swap swap default 0 0" >> /etc/fstab
