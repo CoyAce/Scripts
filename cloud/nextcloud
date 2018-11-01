@@ -74,4 +74,3 @@ cd ~
 git clone https://github.com/ziahamza/webui-aria2.git
 mv webui-aria2 /var/www/html/webui-aria2
 chown -R apache:apache /var/www/html/webui-aria2
-sed -i "/token: /a \      token: \'\$0052634483$\'" /var/www/html/webui-aria2/src/js/services/configuration.js
