@@ -10,3 +10,5 @@ Usage:
 4、supervisor/supervisord 设置开机启动
 
 5、cloud/nextcloud 安装nextcloud
+
+6、domain/update_domain_records.py 更新域名解析记录
