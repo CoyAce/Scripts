@@ -28,9 +28,9 @@ get_ip(){
 update_host(){
 	host=`get_ip`
 	sed -i "s/\"server\".*/\"server\":\"$host\",/" /etc/shadowsocks.json
-	filepath=`find /var/www/html -name config.php -print|sort|head -n 1`
-	sed -i "s/0 => .*,/0 => \'$host\',/" /var/www/html/*/config.php
-	sed -i "s/1 => .*,/1 => \'coyace.top\',/" /var/www/html/*/config.php
+	configpath=`find /var/www/html -name config.php -print|sort -r|head -n 1`
+	sed -i "s/0 => .*,/0 => \'$host\',/" $configpath
+	sed -i "s/1 => .*,/1 => \'coyace.top\',/" $configpath
 	../cloud/scan
 	cat /etc/shadowsocks.json
 }
