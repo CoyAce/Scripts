@@ -64,7 +64,7 @@ cd ~
 git clone https://github.com/e-alfred/ocdownloader.git
 chmod 755 ocdownloader
 sed -i '/$Args =.*/a \\tarray_unshift($Args,"token:$0052634483$");' ocdownloader/controller/lib/aria2.php
-cp -r ocdownloader /var/www/html/nextcloud/apps/ocdownloader
+mv ocdownloader /var/www/html/nextcloud/apps/ocdownloader
 pip install --upgrade youtube_dl
 cd `find /var/www/html -name occ -printf '%h\n'|sort|head -n 1`
 sudo -u apache php occ app:enable ocdownloader
