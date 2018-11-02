@@ -1,0 +1,15 @@
+#!/bin/bash
+while getopts "sdl:" arg
+	do
+		case $arg in
+			s)
+				curl -H "API-Key: $1" https://api.vultr.com/v1/server/create --data 'DCID=40' --data 'VPSPLANID=201' --data 'OSID=167' --data 'SCRIPTID=337754' --data 'enable_ipv6=yes' --data 'enable_private_network=yes'
+			;;
+			d)
+				
+			;;
+			l)
+				
+			;;
+		esac
+	done
