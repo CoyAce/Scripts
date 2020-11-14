@@ -10,7 +10,7 @@ sudo systemctl enable httpd.service
 #install php 7
 yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum -y install yum-utils
-yum-config-manager --enable remi-php70
+yum-config-manager --enable remi-php74
 yum -y install php php-common php-xml php-zip php-gd php-mbstring php-process php-mysqlnd php-intl php-mcrypt php-imap php-cli
 sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php.ini
 
