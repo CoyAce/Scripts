@@ -47,6 +47,7 @@ sudo find /var/www/html/nextcloud -type d -print0 | sudo xargs -0 chmod 0750
 sudo chown -R root:apache /var/www/html/nextcloud
 sudo chown -R apache:apache /var/www/html/nextcloud/apps
 sudo chown -R apache:apache /var/www/html/nextcloud/config
+mkdir /var/www/html/nextcloud/data
 sudo chown -R apache:apache /var/www/html/nextcloud/data
 sudo chown -R apache:apache /var/www/html/nextcloud/themes
 sudo chown -R apache:apache /var/www/html/nextcloud/updater
