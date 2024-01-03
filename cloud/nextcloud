@@ -33,9 +33,9 @@ _EOF_
 
 #install nextcloud
 cd ~
-wget https://download.nextcloud.com/server/releases/nextcloud-20.0.1.zip
+wget https://download.nextcloud.com/server/releases/nextcloud-28.0.1.zip
 yum install unzip -y
-unzip nextcloud-20.0.1.zip
+unzip nextcloud-28.0.1.zip
 sudo mv nextcloud /var/www/html/nextcloud && sudo chown apache:apache -R /var/www/html
 cd /var/www/html/nextcloud
 sudo -u apache php occ maintenance:install --database "mysql" --database-name "nextcloud"  --database-user "admin" --database-pass "${db_root_password}" --admin-user "admin" --admin-pass "${db_root_password}"
