@@ -1,0 +1,11 @@
+# cat /etc/systemd/system/aria2.service 
+[Unit]
+Description=Aria2 Service
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/aria2c --daemon=true --enable-rpc=true --rpc-secret=JustDoIt --rpc-listen-all=true --quiet=true --conf-path=/etc/aria2.conf
+
+[Install]
+WantedBy=multi-user.target
