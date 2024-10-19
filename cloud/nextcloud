@@ -20,7 +20,7 @@ yum -y install yum-utils
 dnf module -y install php:remi-8.3
 yum -y install php php-fpm php-common php-xml php-zip php-gd php-mbstring php-process php-mysqlnd php-intl php-mcrypt php-imap php-cli php-pecl-memcached
 sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 100000M/" /etc/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 10000M/" /etc/php.ini
 sed -i "s/opcache.memory_consumption=128/opcache.memory_consumption=256/" /etc/php.d/10-opcache.ini
 sudo systemctl enable php-fpm
 
