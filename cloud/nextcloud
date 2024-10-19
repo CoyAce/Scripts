@@ -20,6 +20,7 @@ yum -y install yum-utils
 dnf module -y install php:remi-8.4
 yum -y install php php-fpm php-common php-xml php-zip php-gd php-mbstring php-process php-mysqlnd php-intl php-mcrypt php-imap php-cli php-pecl-memcached
 sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php.ini
+sudo systemctl enable php-fpm
 
 #install mariaDB
 yum install mariadb mariadb-server -y
