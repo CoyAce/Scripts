@@ -11,13 +11,13 @@ sudo systemctl enable httpd.service
 sudo yum install memcached -y
 sudo systemctl enable memcached
 
-#install php 8.4
+#install php 8.3
 # Add Remi's repo
 sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(cut -d ' ' -f 4 /etc/redhat-release | cut -d '.' -f 1).noarch.rpm -y
 sudo dnf install https://rpms.remirepo.net/enterprise/remi-release-$(cut -d ' ' -f 4 /etc/redhat-release | cut -d '.' -f 1).rpm -y
 yum -y install yum-utils
 # config php
-dnf module -y install php:remi-8.4
+dnf module -y install php:remi-8.3
 yum -y install php php-fpm php-common php-xml php-zip php-gd php-mbstring php-process php-mysqlnd php-intl php-mcrypt php-imap php-cli php-pecl-memcached
 sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php.ini
 sudo systemctl enable php-fpm
