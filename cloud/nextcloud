@@ -23,6 +23,7 @@ sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 10000M/" /etc/php.ini
 sed -i "s/;opcache.memory_consumption=128/opcache.memory_consumption=256/" /etc/php.d/10-opcache.ini
 sed -i "s/;opcache.interned_strings_buffer=8/opcache.interned_strings_buffer=16/" /etc/php.d/10-opcache.ini
+sed -i "/installed/a\  'memcache.local' => '\\\OC\\\Memcache\\\APCu'," /var/www/html/nextcloud/config/config.php
 sudo systemctl enable php-fpm
 
 #install mariaDB
