@@ -65,12 +65,9 @@ while getopts "ishabup:" arg
 				wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
 				chmod +x bbr.sh
 				./bbr.sh
-				echo '''# remove kernel
-				# rpm -qa|grep kernel
-				# yum remove kernel_name'''
 			;;
 			h)
-				echo "usage: -a ip address,-i install,-s start,-u update host,-b install bbr"
+				echo "usage: -a see ip address,-i install shadowsocks,-s start server,-u use local ip to update server config,-b install bbr"
 			;;
 		esac
 	done
