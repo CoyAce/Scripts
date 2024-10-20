@@ -1,5 +1,0 @@
-#!/bin/bash
-./aria/install
-firewall-cmd --zone=public --add-port=6800/tcp --permanent
-firewall-cmd --reload
-./cloud/nextcloud

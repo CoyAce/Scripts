@@ -1,0 +1,9 @@
+#!/bin/bash
+./aria/install
+firewall-cmd --zone=public --add-port=6800/tcp --permanent
+firewall-cmd --reload
+#aria2 webui
+cd ~
+git clone https://github.com/ziahamza/webui-aria2.git
+mv webui-aria2 /var/www/html/webui-aria2
+chown -R apache:apache /var/www/html/webui-aria2

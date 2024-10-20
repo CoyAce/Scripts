@@ -82,9 +82,3 @@ mv ocdownloader /var/www/html/nextcloud/apps/ocdownloader
 pip install --upgrade youtube_dl
 cd `find /var/www/html -name occ -printf '%h\n'|sort|head -n 1`
 sudo -u apache php occ app:enable ocdownloader
-
-#aria2 webui
-cd ~
-git clone https://github.com/ziahamza/webui-aria2.git
-mv webui-aria2 /var/www/html/webui-aria2
-chown -R apache:apache /var/www/html/webui-aria2
