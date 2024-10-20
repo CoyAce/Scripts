@@ -5,7 +5,10 @@ After=network.target
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/aria2c --daemon=true --enable-rpc=true --rpc-listen-all=true --quiet=true --conf-path=/etc/aria2.conf --bt-tracker=`wget -qO- https://trackerslist.com/best_aria2.txt`
+EnvironmentFile=/etc/trackers
+ExecStartPre=/usr/bin/echo trackers=`/usr/bin/wget -qO- https://trackerslist.com/best_aria2.txt` > /etc/trackers
+ExecStart=/usr/bin/aria2c --daemon=true --quiet=true --enable-rpc=true --rpc-listen-all=true --conf-path=/etc/aria2.conf --bt-tracker=${trackers}
+
 
 [Install]
 WantedBy=multi-user.target

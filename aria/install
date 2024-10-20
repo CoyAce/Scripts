@@ -1,1 +1,6 @@
-yum -y install aria2
+#!/bin/bash
+rpm -qa | grep -qw aria2 || yum -y install aria2
+cp aria2.conf /etc/aria2.conf
+cp aria2.service /usr/lib/systemd/system
+systemctl enable aria2
+systemctl start aria2
