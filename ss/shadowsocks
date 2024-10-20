@@ -27,17 +27,22 @@ get_ip(){
 
 update_host(){
 	host=`get_ip`
+	# update shadowsocks
 	sed -i "s/\"server\".*/\"server\":\"$host\",/" /etc/shadowsocks.json
+
+	# update nextcloud
 	configpath=`find /var/www/html -name config.php -print|sort -r|head -n 1`
 	sed -i "s/0 => .*,/0 => \'$host\',/" $configpath
 	sed -i "s/1 => .*,/1 => \'coyace.top\',/" $configpath
+	# sync nextcloud files
 	../cloud/scan
+	# show result
 	cat /etc/shadowsocks.json
 }
 
 #get local ip address
 init_config
-while getopts "ishabup:" arg
+while getopts "ishabp:" arg
 	do
 		case $arg in
 			a)
@@ -48,9 +53,6 @@ while getopts "ishabup:" arg
 				sed -i "s/\"password\".*/\"password\":\"$password\",/" /etc/shadowsocks.json
 				update_host
 			;;
-			u)
-				update_host
-			;;
 			i)
 				rpm -qa | grep -qw python-setuptools || yum -y install python-setuptools
 				sudo easy_install pip
@@ -58,6 +60,9 @@ while getopts "ishabup:" arg
 				echo "done"
 			;;
 			s)
+				# handle dynamic ip
+				# 滚动更新ip时需要更新ip地址
+				update_host
 				nohup ssserver -c /etc/shadowsocks.json -d start &
 			;;
 			b)
@@ -67,7 +72,7 @@ while getopts "ishabup:" arg
 				./bbr.sh
 			;;
 			h)
-				echo "usage: -a see ip address,-i install shadowsocks,-s start server,-u use local ip to update server config,-b install bbr"
+				echo "usage: -a see ip address,-i install shadowsocks,-s start server,-b install bbr"
 			;;
 		esac
 	done
