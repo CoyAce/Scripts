@@ -1,0 +1,11 @@
+#!/bin/bash
+# 此脚本用将视频转换为webm格式
+# hanlde name param
+input_filename=$1
+base_name=`echo $1 | sed -e "s/\..*$//"`
+output_filename=$base_name.webm
+logname=$base_name.log
+
+if test -e $input_filename ;then
+    nohup ffmpeg -i ${input_filename} -c:v libvpx-vp9 -crf 30 -b:v 0 ${output_filename} > ${logname} 2>&1 &
+fi
