@@ -1,0 +1,10 @@
+#!/bin/bash
+# Usage: certificate 15465811_coyace.zip
+base_name=`echo $1 | sed -e "s/\..*$//"`
+cd `find /var/www/html -name $1 -printf '%h\n'|sort|head -n 1`
+unzip -o $1
+mv -n -u ${base_name} /etc/httpd/cert
+sed -i -E 's/(SSLCertificateFile \/etc\/httpd\/cert\/)([0-9]+_[a-z]+)/\1'"${base_name}"'/' /etc/httpd/conf.d/ssl.conf
+sed -i -E 's/(SSLCertificateKeyFile \/etc\/httpd\/cert\/)([0-9]+_[a-z]+)/\1'"${base_name}"'/' /etc/httpd/conf.d/ssl.conf
+sed -i -E 's/(SSLCertificateChainFile \/etc\/httpd\/cert\/)([0-9]+_[a-z]+)/\1'"${base_name}"'/' /etc/httpd/conf.d/ssl.conf
+systemctl restart httpd
