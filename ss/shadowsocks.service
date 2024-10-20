@@ -1,0 +1,13 @@
+[Unit]
+Description=Shadowsocks Server
+Documentation=https://github.com/CoyAce/Scripts
+
+[Service]
+Type=forking
+ExecStart=/root/Scripts/ss/shadowsocks -s
+KillMode=process
+Restart=on-failure
+RestartSec=50s
+
+[Install]
+WantedBy=multi-user.target

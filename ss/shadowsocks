@@ -57,6 +57,9 @@ while getopts "ishabp:" arg
 				rpm -qa | grep -qw python-setuptools || yum -y install python-setuptools
 				sudo easy_install pip
 				sudo pip install shadowsocks
+				mv shadowsocks.service /usr/lib/systemd/system
+				systemctl enable shadowsocks
+				systemctl start shadowsocks
 				echo "done"
 			;;
 			s)
