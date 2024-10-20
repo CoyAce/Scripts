@@ -1,4 +1,6 @@
-# Shadowsocks安装和启动脚本
+# 配置脚本
+Shadowsocks、Nextcloud、Aria2
+
 Usage:
 
 * ss/shadowsocks -i -p password 安装shadowsocks
