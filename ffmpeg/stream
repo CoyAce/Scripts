@@ -13,8 +13,9 @@ encode(){
         ffmpeg -i ${input_filename} -s 1920x1080 -c:v libx264 -preset veryfast -b:v 2600k -maxrate 2600k -bufsize 2M -pass 2 ${output_filename}
     fi
 }
+export -f encode
 
 input_filename=$1
 base_name=`echo $1 | sed -e "s/\..*$//"`
 logname=$base_name.log
-nohup encode $1 > ${logname} 2>&1 &
+nohup bash -c "encode $1" > ${logname} 2>&1 &
