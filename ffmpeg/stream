@@ -1,11 +1,20 @@
 #!/bin/bash
 # 此脚本用将视频转换为易于online streaming的mp4
-# hanlde name param
+
+encode(){
+    # hanlde name param
+    input_filename=$1
+    base_name=`echo $1 | sed -e "s/\..*$//"`
+    output_filename=$base_name-stream.mp4
+    logname=$base_name.log
+
+    if test -e $input_filename ;then
+        ffmpeg -i ${input_filename} -s 1920x1080 -c:v libx264 -preset veryfast -b:v 2600k -maxrate 2600k -bufsize 2M -pass 1 -f null /dev/null
+        ffmpeg -i ${input_filename} -s 1920x1080 -c:v libx264 -preset veryfast -b:v 2600k -maxrate 2600k -bufsize 2M -pass 2 ${output_filename}
+    fi
+}
+
 input_filename=$1
 base_name=`echo $1 | sed -e "s/\..*$//"`
-output_filename=$base_name-stream.mp4
 logname=$base_name.log
-
-if test -e $input_filename ;then
-    nohup ffmpeg -i ${input_filename} s 1920x1080 -c:v libx264 -preset veryfast -crf 23 -maxrate 2600k -bufsize 2M ${output_filename}  > ${logname} 2>&1 &
-fi
+nohup encode $1 > ${logname} 2>&1 &
