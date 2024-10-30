@@ -13,6 +13,7 @@ encode(){
         ffmpeg -i ${input_filename} -s 1920x1080 -c:v libx264 -preset veryfast -b:v 2600k -maxrate 2600k -bufsize 2M -pass 2 ${output_filename}
     fi
 }
+# 解决nohup不能使用函数的问题
 export -f encode
 
 input_filename=$1
