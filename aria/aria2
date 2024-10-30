@@ -1,0 +1,9 @@
+/var/log/aria2.log
+{                
+    daily                    //每天切割一次
+    minsize 20M              //文件大小超过 20M 后才会切割
+    missingok
+    notifempty
+    dateext
+    rotate 1                    //只保留一个日志.
+}

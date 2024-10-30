@@ -4,5 +4,6 @@ cp -u aria2.conf /etc/aria2.conf
 cp -u aria2.service /usr/lib/systemd/system
 cp -u dht.dat /root/.aria2/dht.dat
 cp -u dht6.dat /root/.aria2/dht6.dat
+cp -u aria2 /etc/logrotate.d
 systemctl enable aria2
 systemctl start aria2
