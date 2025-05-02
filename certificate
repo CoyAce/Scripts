@@ -5,7 +5,8 @@ read path filename <<< `find /var/www/html -name *$1.zip -printf '%h %f\n'|sort 
 cd $path
 unzip -o $filename
 base_name=`echo $filename | sed -e "s/\..*$//"`
-mv -n -u ${base_name} /etc/httpd/cert
+rm -rf /etc/httpd/cert/*
+mv ${base_name} /etc/httpd/cert
 sed -i -E 's/(SSLCertificateFile \/etc\/httpd\/cert\/)([0-9]+_[a-z]+)/\1'"${base_name}"'/' /etc/httpd/conf.d/ssl.conf
 sed -i -E 's/(SSLCertificateKeyFile \/etc\/httpd\/cert\/)([0-9]+_[a-z]+)/\1'"${base_name}"'/' /etc/httpd/conf.d/ssl.conf
 sed -i -E 's/(SSLCertificateChainFile \/etc\/httpd\/cert\/)([0-9]+_[a-z]+)/\1'"${base_name}"'/' /etc/httpd/conf.d/ssl.conf
